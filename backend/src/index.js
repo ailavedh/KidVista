@@ -54,6 +54,8 @@ app.use('/api', apiRouter);
 
 // Serve frontend build if it exists
 const frontendDistDir = path.join(__dirname, '../public');
+console.log(`[DEBUG] Checking for frontend static files at: ${frontendDistDir}`);
+
 if (fs.existsSync(frontendDistDir)) {
   console.log(`✔ Frontend static files detected. Serving from ${frontendDistDir}`);
   app.use(express.static(frontendDistDir));
@@ -65,6 +67,30 @@ if (fs.existsSync(frontendDistDir)) {
     } else {
       next();
     }
+  });
+} else {
+  console.log(`❌ ERROR: Frontend directory NOT FOUND at ${frontendDistDir}`);
+  try {
+    const parentDir = path.join(__dirname, '..');
+    const contents = fs.readdirSync(parentDir);
+    console.log(`[DEBUG] Contents of ${parentDir}:`, contents);
+  } catch (err) {
+    console.error('[DEBUG] Failed to read parent directory', err);
+  }
+
+  // Fallback route to show exactly what's wrong instead of 'Cannot GET /'
+  app.get('/', (req, res) => {
+    res.status(404).send(`
+      <h1>Deployment Configuration Error</h1>
+      <p>The backend server is running successfully, but the frontend files were not found.</p>
+      <p>Expected frontend path: <code>${frontendDistDir}</code></p>
+      <p><strong>How to fix on Render:</strong></p>
+      <ol>
+        <li>Go to your Render Dashboard.</li>
+        <li>Click on your Web Service.</li>
+        <li>Click <strong>Manual Deploy</strong> and select <strong>Clear build cache & deploy</strong>.</li>
+      </ol>
+    `);
   });
 }
 

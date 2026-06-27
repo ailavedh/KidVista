@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "KidVista Daily Activity Photo Sharing Portal",
   "main": "backend/src/index.js",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "start": "node backend/src/index.js",
     "dev": "nodemon backend/src/index.js",
