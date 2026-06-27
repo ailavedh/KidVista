@@ -52,7 +52,21 @@ apiRouter.use('/parent', parentRoutes);
 
 app.use('/api', apiRouter);
 
+// Serve frontend build if it exists
+const frontendDistDir = path.join(__dirname, '../../frontend/dist');
+if (fs.existsSync(frontendDistDir)) {
+  console.log(`✔ Frontend static files detected. Serving from ${frontendDistDir}`);
+  app.use(express.static(frontendDistDir));
 
+  // React client-side router fallback
+  app.get('*', (req, res, next) => {
+    if (!req.path.startsWith('/api') && !req.path.startsWith('/uploads')) {
+      res.sendFile(path.join(frontendDistDir, 'index.html'));
+    } else {
+      next();
+    }
+  });
+}
 
 // Error handling middleware
 app.use((err, req, res, next) => {

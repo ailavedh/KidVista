@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
+    "build": "npm install --prefix ../frontend && npm run build --prefix ../frontend",
     "db:init": "node db-init.js",
     "test": "node src/tests/api.test.js"
   },
