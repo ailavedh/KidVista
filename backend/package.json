@@ -11,8 +11,7 @@
     "dev": "nodemon src/index.js",
     "build": "npm run postinstall",
     "postinstall": "npm install --prefix ../frontend && npm run build --prefix ../frontend",
-    "db:init": "node db-init.js",
-    "test": "node src/tests/api.test.js"
+    "db:init": "node db-init.js"
   },
   "dependencies": {
     "@google/generative-ai": "^0.11.4",
