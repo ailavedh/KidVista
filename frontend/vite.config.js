@@ -17,5 +17,9 @@ export default defineConfig({
         secure: false,
       }
     }
+  },
+  build: {
+    outDir: '../backend/public',
+    emptyOutDir: true,
   }
 })

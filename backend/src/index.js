@@ -53,7 +53,7 @@ apiRouter.use('/parent', parentRoutes);
 app.use('/api', apiRouter);
 
 // Serve frontend build if it exists
-const frontendDistDir = path.join(__dirname, '../../frontend/dist');
+const frontendDistDir = path.join(__dirname, '../public');
 if (fs.existsSync(frontendDistDir)) {
   console.log(`✔ Frontend static files detected. Serving from ${frontendDistDir}`);
   app.use(express.static(frontendDistDir));
