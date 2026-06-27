@@ -1,0 +1,26 @@
+{
+  "name": "kidvista-portal",
+  "version": "1.0.0",
+  "description": "KidVista Daily Activity Photo Sharing Portal",
+  "main": "backend/src/index.js",
+  "scripts": {
+    "start": "node backend/src/index.js",
+    "dev": "nodemon backend/src/index.js",
+    "build": "npm install --prefix frontend && npm run build --prefix frontend",
+    "db:init": "node backend/db-init.js",
+    "test": "node backend/src/tests/api.test.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.11.4",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.9.8"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
